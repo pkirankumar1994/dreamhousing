@@ -1,0 +1,70 @@
+{% extends "admin/adminbase.html" %}
+
+{% block title %}All Users{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="row mb-3">
+      <div class="col-lg-6">
+        <input id="searchInput" type="text" class="form-control" placeholder="Search by First Name">
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Position</th>
+            <th>Business Arena</th>
+            <th>Street</th>
+            <th>Place</th>
+            <th>Country</th>
+            <th>Phone Number</th>
+            <th>Aadhar Number</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr class="user-row">
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.position }}</td>
+            <td>{{ user.business_arena }}</td>
+            <td>{{ user.street }}</td>
+            <td>{{ user.place }}</td>
+            <td>{{ user.country }}</td>
+            <td>{{ user.phone_number }}</td>
+            <td>{{ user.adhar_number }}</td>
+            <td>{{ user.role }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const userRows = document.getElementsByClassName('user-row');
+
+    searchInput.addEventListener('input', () => {
+      const searchValue = searchInput.value.toLowerCase();
+
+      Array.from(userRows).forEach(row => {
+        const firstName = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+        if (firstName.includes(searchValue)) {
+          row.style.display = 'table-row';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  </script>
+{% endblock %}

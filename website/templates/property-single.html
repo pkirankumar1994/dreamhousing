@@ -1,0 +1,188 @@
+{% extends "base.html" %} {% block title %}Property Details{% endblock %} {%
+block content %}
+<main id="main">
+  <!-- ======= Intro Single ======= -->
+  <section class="intro-single">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div class="title-single-box">
+            <h1 class="title-single">
+              {{ property.property_id }} {{ property.location }}
+            </h1>
+            <span class="color-text-a">{{ property.location }}</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <nav
+            aria-label="breadcrumb"
+            class="breadcrumb-box d-flex justify-content-lg-end"
+          >
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="/">Home</a>
+              </li>
+              <li class="breadcrumb-item">
+                <a href="/property">Properties</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                {{ property.title }}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Intro Single-->
+
+  <!-- ======= Property Single ======= -->
+  <section class="property-single nav-arrow-b">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div id="property-single-carousel" class="swiper">
+            <div class="swiper-wrapper">
+              {% set images = property.imageUrls.split(',') %} {% for image in
+              images %}
+              <div class="carousel-item-b swiper-slide">
+                <img src="{{ image }}" alt="" />
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div
+            class="property-single-carousel-pagination carousel-pagination"
+          ></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="row justify-content-between">
+            <div class="col-md-5 col-lg-4">
+              <div class="property-price d-flex justify-content-center foo">
+                <div class="card-header-c d-flex">
+                  <div class="card-box-ico">
+                    <span class="bi bi-cash">$</span>
+                  </div>
+                  <div class="card-title-c align-self-center">
+                    <h5 class="title-c">{{ property.price }}</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="property-summary">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="title-box-d section-t4">
+                      <h3 class="title-d">Quick Summary</h3>
+                    </div>
+                  </div>
+                </div>
+                <div class="summary-list">
+                  <ul class="list">
+                    <li class="d-flex justify-content-between">
+                      <strong>Property ID:</strong>
+                      <span>{{ property.id }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Location:</strong>
+                      <span>{{ property.location }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Property Type:</strong>
+                      <span>{{ property.property_type }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Status:</strong>
+                      <span
+                        >{{ "Available" if property.status else "Not Available"
+                        }}</span
+                      >
+                    </li>
+
+                    <li class="d-flex justify-content-between">
+                      <strong>Area:</strong>
+                      <span>{{ property.area }}m<sup>2</sup></span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Beds:</strong>
+                      <span>{{ property.beds }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Baths:</strong>
+                      <span>{{ property.baths }}</span>
+                    </li>
+                    <li class="d-flex justify-content-between">
+                      <strong>Garage:</strong>
+                      <span>{{ property.garage }}</span>
+                    </li>
+                  </ul>
+                </div>
+                {% if property.status %}
+                <a
+                  href="/property-request/{{ property.id }}"
+                  class="btn btn-primary btn-block"
+                >
+                  Buy now
+                </a>
+                {% else %}
+                <button type="button" class="btn btn-danger btn-block" disabled>
+                  Not Available
+                </button>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-md-7 col-lg-7 section-md-t3">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="title-box-d">
+                    <h3 class="title-d">Property Description</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="property-description">
+                <p class="description color-text-a">
+                  {{ property.description }}
+                </p>
+              </div>
+              <div class="row section-t3">
+                <div class="col-sm-12">
+                  <div class="title-box-d">
+                    <h3 class="title-d">Amenities</h3>
+                  </div>
+                </div>
+              </div>
+              <div class="amenities-list color-text-a">
+                <ul class="list-a no-margin">
+                  {% if property.balcony %}
+                  <li>Balcony</li>
+                  {% endif %} {% if property.outdoor_kitchen %}
+                  <li>Outdoor kitchen</li>
+                  {% endif %} {% if property.cable_tv %}
+                  <li>Cable TV</li>
+                  {% endif %} {% if property.decks %}
+                  <li>Decks</li>
+                  {% endif %} {% if property.tennis_court %}
+                  <li>Tennis court</li>
+                  {% endif %} {% if property.internet %}
+                  <li>Internet</li>
+                  {% endif %} {% if property.parking %}
+                  <li>Parking</li>
+                  {% endif %} {% if property.sun_room %}
+                  <li>Sun room</li>
+                  {% endif %} {% if property.concrete_flooring %}
+                  <li>Concrete flooring</li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Property Single -->
+</main>
+<!-- End #main -->
+{% endblock %}

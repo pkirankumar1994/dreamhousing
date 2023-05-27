@@ -1,0 +1,126 @@
+{% extends "base.html" %} {% block title %}Purchase Request{% endblock %} {%
+block content %}
+<body>
+  <div class="container mt-5">
+    <form method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="adhar_card_front" class="form-label"
+          >Aadhar Card Front Image:</label
+        >
+        <input
+          type="file"
+          class="form-control"
+          name="adhar_card_front"
+          id="adhar_card_front"
+          accept=".jpg, .jpeg, .png"
+          required
+        />
+        <img
+          id="adhar_card_front_preview"
+          src="#"
+          alt="Aadhar Card Front"
+          style="display: none; max-width: 200px; margin-top: 10px"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="adhar_card_back" class="form-label"
+          >Aadhar Card Back Image:</label
+        >
+        <input
+          type="file"
+          class="form-control"
+          name="adhar_card_back"
+          id="adhar_card_back"
+          accept=".jpg, .jpeg, .png"
+          required
+        />
+        <img
+          id="adhar_card_back_preview"
+          src="#"
+          alt="Aadhar Card Back"
+          style="display: none; max-width: 200px; margin-top: 10px"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="message" class="form-label">Message:</label>
+        <textarea class="form-control" name="message" id="message"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="contact_number" class="form-label">Contact Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="contact_number"
+          id="contact_number"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="desired_price" class="form-label">Desired Price:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="desired_price"
+          id="desired_price"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="payment_method" class="form-label">Payment Method:</label>
+        <input
+          type="text"
+          class="form-control"
+          name="payment_method"
+          id="payment_method"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="scheduled_visit" class="form-label">Scheduled Visit:</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          name="scheduled_visit"
+          id="scheduled_visit"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    function readURL(input, previewId) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          document.getElementById(previewId).src = e.target.result;
+          document.getElementById(previewId).style.display = "block";
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    document
+      .getElementById("adhar_card_front")
+      .addEventListener("change", function () {
+        readURL(this, "adhar_card_front_preview");
+      });
+
+    document
+      .getElementById("adhar_card_back")
+      .addEventListener("change", function () {
+        readURL(this, "adhar_card_back_preview");
+      });
+  </script>
+</body>
+{% endblock %}

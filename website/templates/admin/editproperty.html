@@ -1,0 +1,374 @@
+{% extends "admin/adminbase.html" %} {% block title %}Home{% endblock %} {%
+block content %}
+<div class="container">
+  <form id="editPropertyForm" method="POST" style="margin-top: 30px">
+    <div class="row">
+      <div class="col-md-6">
+        <input
+          type="hidden"
+          id="property_db_id"
+          name="property_db_id"
+          value="{{ property.id }}"
+        />
+        <div class="form-group">
+          <label for="property_id">Property ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="property_id"
+            name="property_id"
+            placeholder="Enter property ID"
+            value="{{ property.property_id }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            placeholder="Enter description"
+            rows="10"
+            cols="10"
+          >
+{{ property.description }}</textarea
+          >
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            name="price"
+            placeholder="Enter price"
+            value="{{ property.price }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input
+            type="text"
+            class="form-control"
+            id="location"
+            name="location"
+            placeholder="Enter location"
+            value="{{ property.location }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="property_type">Property type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="property_type"
+            name="property_type"
+            placeholder="Enter property type"
+            value="{{ property.property_type }}"
+          />
+        </div>
+        <div class="form-group form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="status"
+            name="status"
+            {%
+            if
+            property.status
+            %}
+            checked
+            {%
+            endif
+            %}
+          />
+          <label class="form-check-label" for="status">Availability</label>
+        </div>
+        <div class="form-group">
+          <label for="area">Area</label>
+          <input
+            type="text"
+            class="form-control"
+            id="area"
+            name="area"
+            placeholder="Enter area"
+            value="{{ property.area }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="beds">Beds</label>
+          <input
+            type="text"
+            class="form-control"
+            id="beds"
+            name="beds"
+            placeholder="Enter number of beds"
+            value="{{ property.beds }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="baths">Baths</label>
+          <input
+            type="text"
+            class="form-control"
+            id="baths"
+            name="baths"
+            placeholder="Enter number of baths"
+            value="{{ property.baths }}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="garage">Garage</label>
+          <input
+            type="text"
+            class="form-control"
+            id="garage"
+            name="garage"
+            placeholder="Enter garage"
+            value="{{ property.garage }}"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Amenities</label>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="balcony"
+              name="balcony"
+              {%
+              if
+              property.balcony
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="balcony">Balcony</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="outdoor_kitchen"
+              name="outdoor_kitchen"
+              {%
+              if
+              property.outdoor_kitchen
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="outdoor_kitchen"
+              >Outdoor kitchen</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="cable_tv"
+              name="cable_tv"
+              {%
+              if
+              property.cable_tv
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="cable_tv">Cable TV</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="decks"
+              name="decks"
+              {%
+              if
+              property.decks
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="decks">Decks</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="tennis_court"
+              name="tennis_court"
+              {%
+              if
+              property.tennis_court
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="tennis_court"
+              >Tennis court</label
+            >
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="internet"
+              name="internet"
+              {%
+              if
+              property.internet
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="internet">Internet</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="parking"
+              name="parking"
+              {%
+              if
+              property.parking
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="parking">Parking</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="sun_room"
+              name="sun_room"
+              {%
+              if
+              property.sun_room
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="sun_room">Sun room</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="concrete_flooring"
+              name="concrete_flooring"
+              {%
+              if
+              property.concrete_flooring
+              %}
+              checked
+              {%
+              endif
+              %}
+            />
+            <label class="form-check-label" for="concrete_flooring"
+              >Concrete flooring</label
+            >
+          </div>
+        </div>
+        <div class="form-group mt-4">
+          <label for="image_urls">Image URLs</label>
+          <input
+            type="text"
+            class="form-control"
+            id="image_urls"
+            name="image_urls"
+            placeholder="Enter image URLs separated by commas"
+            value="{{ property.imageUrls }}"
+          />
+        </div>
+        <div class="row mt-4" id="imagePreview"></div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Edit Property</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+  function handleImageUrlsInput() {
+    var imageUrlsInput = document.getElementById("image_urls");
+    var imageUrls = imageUrlsInput.value.split(",");
+
+    var imagePreviewContainer = document.getElementById("imagePreview");
+    imagePreviewContainer.innerHTML = "";
+
+    imageUrls.forEach(function (url) {
+      if (url.trim() !== "") {
+        var img = document.createElement("img");
+        img.src = url.trim();
+        img.classList.add("img-thumbnail", "mr-2");
+        img.style.width = "150px";
+        img.style.height = "150px";
+
+        imagePreviewContainer.appendChild(img);
+      }
+    });
+  }
+
+  // Call the function when the document is loaded
+  document.addEventListener("DOMContentLoaded", function () {
+    handleImageUrlsInput();
+  });
+
+  // Attach the event listener to the input field
+  document
+    .getElementById("image_urls")
+    .addEventListener("input", handleImageUrlsInput);
+
+  // Add event listener to the form submit event
+  // document
+  //   .getElementById("editPropertyForm")
+  //   .addEventListener("submit", async function (e) {
+  //     e.preventDefault(); // Prevent the default form submission
+
+  //     // Get the form data
+  //     var formData = new FormData(this);
+
+  //     // Convert the form data to JSON
+  //     var json = JSON.stringify(Object.fromEntries(formData));
+
+  //     // Perform the AJAX request
+  //     await fetch(`/admin/edit-property/{{ property.id }}`, {
+  //       method: "POST",
+  //       body: json,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //       .then(function (response) {
+  //         console.log(response);
+  //       })
+  //       .catch(function (error) {
+  //         console.log(error);
+  //       });
+  //   });
+</script>
+
+{% endblock %}

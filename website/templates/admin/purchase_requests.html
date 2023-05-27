@@ -1,0 +1,95 @@
+{% extends "admin/adminbase.html" %} {% block title %}Property Buy Requests{%
+endblock %} {% block content %}
+<div class="container mt-5">
+  <h2>Property Buy Requests</h2>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for request in purchase_requests %}
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Property Buy Request ID: {{ request.id }}</h5>
+          <p class="card-text">Status: {{ request.status }}</p>
+          <p class="card-text">
+            User: {{ request.user.first_name }} {{ request.user.last_name }}
+          </p>
+          <p class="card-text">
+            Property ID: {{ request.property.property_id }} - Internal ID: {{
+            request.property.id }}
+            <a href="/viewproperty/{{ request.property.id }}" class="card-text">
+              (View Property)
+            </a>
+          </p>
+          <p class="card-text">Message: {{ request.message }}</p>
+          <p class="card-text">Contact Number: {{ request.contact_number }}</p>
+          <p class="card-text">Desired Price: {{ request.desired_price }}</p>
+          <p class="card-text">Payment Method: {{ request.payment_method }}</p>
+          <p class="card-text">
+            Scheduled Visit: {% if request.scheduled_visit %} {{
+            request.scheduled_visit.strftime('%B %d, %Y %I:%M %p') }} {% else %}
+            N/A {% endif %}
+          </p>
+          <div class="mb-3">
+            <label class="form-label">Aadhar Card Front Image:</label>
+            <a
+              href="{{ url_for('static', filename='upload/' + request.adhar_card_front_url) }}"
+              target="_blank"
+            >
+              <img
+                src="{{ url_for('static', filename='upload/' + request.adhar_card_front_url) }}"
+                alt="Aadhar Card Front Image"
+                class="img-fluid"
+              />
+            </a>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Aadhar Card Back Image:</label>
+            <a
+              href="{{ url_for('static', filename='upload/' + request.adhar_card_back_url) }}"
+              target="_blank"
+            >
+              <img
+                src="{{ url_for('static', filename='upload/' + request.adhar_card_back_url) }}"
+                alt="Aadhar Card Back Image"
+                class="img-fluid"
+              />
+            </a>
+          </div>
+          <button
+            onclick="updateStatus('{{ request.id }}', 'Accepted')"
+            class="btn btn-success"
+          >
+            Accept
+          </button>
+          <button
+            onclick="updateStatus('{{ request.id }}', 'Rejected')"
+            class="btn btn-danger"
+          >
+            Reject
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  async function updateStatus(requestId, status) {
+    try {
+      const response = await fetch(`/update-status/${requestId}/${status}`, {
+        method: "POST",
+      });
+      if (response.ok) {
+        alert(`Property buy request ${status.toLowerCase()} successfully!`);
+        // Reload the page to reflect the updated status
+        location.reload();
+      } else {
+        throw new Error("Failed to update status");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while updating the status");
+    }
+  }
+</script>
+{% endblock %}

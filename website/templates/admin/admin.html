@@ -1,0 +1,96 @@
+{% extends "admin/adminbase.html" %} {% block title %}Home{% endblock %} {%
+block content %}
+<div class="container mt-5">
+  <h1 class="text-center">Properties</h1>
+  <div class="row">
+    {% for property in properties %}
+    <div class="col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ property.property_id }}</h5>
+          <p class="card-text">
+            <strong>Description:</strong> {{ property.description }}<br>
+            <strong>Location:</strong> {{ property.location }}<br>
+            <strong>Property type:</strong> {{ property.property_type }}<br>
+            <strong>Status:</strong> {% if property.status %}Active{% else %}Inactive{% endif %}<br>
+            <strong>Area:</strong> {{ property.area }}<br>
+            <strong>Beds:</strong> {{ property.beds }}<br>
+            <strong>Baths:</strong> {{ property.baths }}<br>
+            <strong>Garage:</strong> {{ property.garage }}<br>
+            <strong>Image URLs:</strong>
+          <ul class="list-unstyled">
+            {% for url in property.imageUrls.split(',') %}
+            <img src="{{url}}" width="100" height="100"/>
+            {% endfor %}
+          </ul>
+          <strong>Amenities:</strong>
+          <ul class="list-unstyled">
+            {% if property.balcony %}
+            <li>Balcony</li>
+            {% endif %}
+            {% if property.outdoor_kitchen %}
+            <li>Outdoor kitchen</li>
+            {% endif %}
+            {% if property.cable_tv %}
+            <li>Cable TV</li>
+            {% endif %}
+            {% if property.decks %}
+            <li>Decks</li>
+            {% endif %}
+            {% if property.tennis_court %}
+            <li>Tennis court</li>
+            {% endif %}
+            {% if property.internet %}
+            <li>Internet</li>
+            {% endif %}
+            {% if property.parking %}
+            <li>Parking</li>
+            {% endif %}
+            {% if property.sun_room %}
+            <li>Sun room</li>
+            {% endif %}
+            {% if property.concrete_flooring %}
+            <li>Concrete flooring</li>
+            {% endif %}
+          </ul>
+          </p>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-danger" onClick="deleteProperty({{ property.id }})">
+            Delete
+          </button>
+          <button type="button" class="btn btn-primary" onClick="editProperty({{ property.id }})">
+            Edit
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %} {% block javascript %}
+<script type="text/javascript">
+  async function deleteProperty(propertyId) {
+    if (confirm("Are you sure you want to delete this property?")) {
+      // Make an AJAX request to delete the property
+      await fetch("/delete-property", {
+        method: "POST",
+        body: JSON.stringify({ propertyId: propertyId }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((_res) => { })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("An error occurred");
+        });
+    }
+  }
+
+  function editProperty(propertyId) {
+    // Redirect to the edit property page
+    window.location.href = `admin/edit-property/${propertyId}`;
+  }
+</script>
+{% endblock %}
