@@ -112,6 +112,12 @@ def product_buy_request(property_id):
 @views.route('/admin', methods=['GET', 'POST'])
 @login_required
 def properties():
+    properties = Property.query.all()  # Retrieve all properties
+    return render_template("admin/admin.html", user=current_user, properties=properties)
+
+@views.route('/admin/newproperty', methods=['GET', 'POST'])
+@login_required
+def newproperty():
     if request.method == 'POST':
         try:
             # Get Property details from the HTML form
@@ -167,12 +173,6 @@ def properties():
             flash('An error occurred while adding the property!', category='error')
             print(e)
 
-    properties = Property.query.all()  # Retrieve all properties
-    return render_template("admin/admin.html", user=current_user, properties=properties)
-
-@views.route('/admin/newproperty', methods=['GET', 'POST'])
-@login_required
-def newproperty():
     return render_template("admin/newproperty.html", user=current_user)
 
 @views.route('/delete-property', methods=['POST'])
