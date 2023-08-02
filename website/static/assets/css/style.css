@@ -1329,6 +1329,7 @@ a:hover {
 .card-header-a .card-title-a a {
   color: #ffffff;
   text-decoration: none;
+  font-size: 1rem;
 }
 
 .card-body-a {
