@@ -390,7 +390,12 @@ a:hover {
 /*------/ Overlay /------*/
 .overlay-a {
   text-decoration: none;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 27%, rgba(0, 0, 0, 0.65) 90%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 27%,
+    rgba(0, 0, 0, 0.65) 90%
+  );
 }
 
 .overlay {
@@ -639,7 +644,6 @@ a:hover {
 }
 
 @media (min-width: 768px) {
-
   .navbar-default.navbar-trans .nav-item,
   .navbar-default.navbar-reduce .nav-item {
     margin-left: 15px;
@@ -684,12 +688,12 @@ a:hover {
   transform-origin: left;
 }
 
-.navbar-default.navbar-trans .show>.nav-link:before,
-.navbar-default.navbar-trans .active>.nav-link:before,
+.navbar-default.navbar-trans .show > .nav-link:before,
+.navbar-default.navbar-trans .active > .nav-link:before,
 .navbar-default.navbar-trans .nav-link.show:before,
 .navbar-default.navbar-trans .nav-link.active:before,
-.navbar-default.navbar-reduce .show>.nav-link:before,
-.navbar-default.navbar-reduce .active>.nav-link:before,
+.navbar-default.navbar-reduce .show > .nav-link:before,
+.navbar-default.navbar-reduce .active > .nav-link:before,
 .navbar-default.navbar-reduce .nav-link.show:before,
 .navbar-default.navbar-reduce .nav-link.active:before {
   transform: scaleX(1);
@@ -703,8 +707,8 @@ a:hover {
   color: #000000;
 }
 
-.navbar-default.navbar-trans .show>.nav-link,
-.navbar-default.navbar-trans .active>.nav-link,
+.navbar-default.navbar-trans .show > .nav-link,
+.navbar-default.navbar-trans .active > .nav-link,
 .navbar-default.navbar-trans .nav-link.show,
 .navbar-default.navbar-trans .nav-link.active {
   color: #000000;
@@ -728,8 +732,8 @@ a:hover {
   color: #000000;
 }
 
-.navbar-default.navbar-reduce .show>.nav-link,
-.navbar-default.navbar-reduce .active>.nav-link,
+.navbar-default.navbar-reduce .show > .nav-link,
+.navbar-default.navbar-reduce .active > .nav-link,
 .navbar-default.navbar-reduce .nav-link.show,
 .navbar-default.navbar-reduce .nav-link.active {
   color: #000000;
@@ -748,7 +752,8 @@ a:hover {
   opacity: 0;
   filter: alpha(opacity=0);
   visibility: hidden;
-  transition: all 0.5s cubic-bezier(0.3, 0.65, 0.355, 1) 0s, opacity 0.31s ease 0s, height 0s linear 0.36s;
+  transition: all 0.5s cubic-bezier(0.3, 0.65, 0.355, 1) 0s,
+    opacity 0.31s ease 0s, height 0s linear 0.36s;
   margin: 0;
   border-radius: 0;
   padding: 12px 0;
@@ -1155,7 +1160,6 @@ a:hover {
 # Card General
 --------------------------------------------------------------*/
 @media (max-width: 767px) {
-
   .card-box-a,
   .card-box-b,
   .card-box-c,
@@ -1172,7 +1176,6 @@ a:hover {
 }
 
 @media (min-width: 768px) {
-
   .grid .card-box-a,
   .grid .card-box-b,
   .grid .card-box-c,
@@ -1198,7 +1201,6 @@ a:hover {
 }
 
 @media (min-width: 768px) {
-
   .card-box-a:hover .img-a,
   .card-box-a:hover .img-b,
   .card-box-b:hover .img-a,
@@ -1208,7 +1210,6 @@ a:hover {
 }
 
 @media (min-width: 768px) {
-
   .card-box-a .price-a,
   .card-box-b .price-a {
     font-size: 0.9rem;
@@ -1216,7 +1217,6 @@ a:hover {
 }
 
 @media (min-width: 992px) {
-
   .card-box-a .price-a,
   .card-box-b .price-a {
     font-size: 1rem;
@@ -1244,7 +1244,12 @@ a:hover {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 27%, rgba(0, 0, 0, 0.65) 90%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 27%,
+    rgba(0, 0, 0, 0.65) 90%
+  );
 }
 
 /*======================================
@@ -1633,7 +1638,7 @@ a:hover {
 
 .box-comments .list-comments span {
   display: block;
-  color: #2B2A2A;
+  color: #2b2a2a;
   font-style: italic;
 }
 
@@ -2159,48 +2164,105 @@ footer .copyright-footer {
 footer .credits {
   font-size: 14px;
 }
-  
-  .gradient-custom-2 {
+
+.gradient-custom-2 {
   /* fallback for old browsers */
   background: #a1c4fd;
-  
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
-  
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))
-  }
-  
-  .bg-indigo {
-  background-color: #4835d4;
-  }
-  @media (min-width: 992px) {
-  .card-registration-2 .bg-indigo {
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  }
-  }
-  @media (max-width: 991px) {
-  .card-registration-2 .bg-indigo {
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  }
-  }
 
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    rgba(161, 196, 253, 1),
+    rgba(194, 233, 251, 1)
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(
+    to right,
+    rgba(161, 196, 253, 1),
+    rgba(194, 233, 251, 1)
+  );
+}
+
+.bg-indigo {
+  background-color: #4835d4;
+}
+@media (min-width: 992px) {
+  .card-registration-2 .bg-indigo {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+}
+@media (max-width: 991px) {
+  .card-registration-2 .bg-indigo {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+}
+
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    #ee7724,
+    #d8363a,
+    #dd3675,
+    #b44593
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+}
+
+@media (min-width: 769px) {
   .gradient-custom-2 {
-    /* fallback for old browsers */
-    background: #fccb90;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-    }
-    
-    @media (min-width: 769px) {
-    .gradient-custom-2 {
-    border-top-right-radius: .3rem;
-    border-bottom-right-radius: .3rem;
-    }
-    }
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+  }
+}
+
+/* Add this to your CSS file */
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.styled-form {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-width: 400px;
+  width: 100%;
+}
+
+.styled-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+.styled-form input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.styled-form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}

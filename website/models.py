@@ -2,6 +2,7 @@ from . import db
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.dialects.postgresql import ARRAY
+from datetime import datetime, timedelta
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -57,3 +58,12 @@ class PropertyBuyRequest(db.Model):
 
     user = db.relationship('User', backref=db.backref('property_buy_requests', cascade='all, delete-orphan'))
     property = db.relationship('Property', backref=db.backref('buy_requests', cascade='all, delete-orphan'))
+
+class ResetToken(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    token = db.Column(db.String(150), unique=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def is_expired(self):
+        return datetime.utcnow() > self.created_at + timedelta(hours=1)  # Token is valid for 1 hour

@@ -1,9 +1,12 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User,ResetToken
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db   ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
 import re
+from flask_mail import Message, current_app
+from threading import Thread
+import secrets
 
 auth = Blueprint('auth', __name__)
 
@@ -100,3 +103,70 @@ def sign_up():
             flash(error, category='error')
 
     return render_template("sign_up.html", user=current_user)
+
+@auth.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        user = User.query.filter_by(email=email).first()
+
+        if user:
+            # Generate a reset token
+            token = secrets.token_hex(32)
+            reset_token = ResetToken(user_id=user.id, token=token)
+            db.session.add(reset_token)
+            db.session.commit()
+
+            # Send the reset token to the user's email
+            subject = 'Password Reset Request'
+            recipient = user.email
+
+            reset_link = url_for('auth.reset_password', token=token, _external=True)
+            html_body = render_template('email/reset_password_template.html', reset_link=reset_link)
+
+            msg = Message(subject=subject, recipients=[recipient])
+            msg.html = html_body
+
+            Thread(target=send_async_email, args=(current_app._get_current_object(), msg)).start()
+
+            flash('Password reset instructions sent to your email.', category='success')
+            return redirect(url_for('auth.login'))
+
+        flash('No account found with this email.', category='error')
+
+    return render_template("forgot_password.html", user=current_user)
+
+@auth.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    reset_token = ResetToken.query.filter_by(token=token).first()
+
+    if not reset_token or reset_token.is_expired():
+        flash('Invalid or expired reset token.', category='error')
+        return redirect(url_for('auth.login'))
+
+    if request.method == 'POST':
+        new_password = request.form.get('new_password')
+        confirm_password = request.form.get('confirm_password')
+
+        if new_password == confirm_password:
+            # Update the user's password
+            user = User.query.get(reset_token.user_id)
+            user.password = generate_password_hash(new_password, method='sha256')
+
+            # Delete the reset token
+            db.session.delete(reset_token)
+            db.session.commit()
+
+            flash('Password reset successful!', category='success')
+            return redirect(url_for('auth.login'))
+        else:
+            flash('Passwords do not match.', category='error')
+
+    return render_template("reset_password.html", token=token,user={})
+
+def send_async_email(app, msg):
+    with app.app_context():
+        # Access `mail` object using `current_app`
+        mail = current_app.extensions.get('mail')
+        mail.send(msg)
+
