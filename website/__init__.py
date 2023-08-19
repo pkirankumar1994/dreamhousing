@@ -1,13 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from os import path
 from flask_login import LoginManager
 from flask_mail import Mail, Message
 
 
 db = SQLAlchemy()
-migrate = Migrate()
 DB_NAME = "database.db"
 
 
@@ -27,7 +25,6 @@ def create_app():
         return "Page Not Found", 404
 
     db.init_app(app)
-    migrate.init_app(app, db)
 
     from .views import views
     from .auth import auth
